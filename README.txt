@@ -1,0 +1,3 @@
+The decision tree template has been filled, plus the notebook file for decision trees also contains the template functions. It also contains my attempt at creating the decision tree which is not working because of a small problem I couldn't fix. 
+
+For the sum part, I made separate notebook files for teach task and then can be run to get the correct output. The task 4 notebook file contains all the items in saparate blocks of code which can be run separately to test. Works perfectly.

@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10780\viewh14760\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 This file provides explanation for the source code for this assignment. The explanation is also provided to some extent as comments in the source code file.\
+\
+->Please note that the code is provided as a .ipynb file as well as a .py file in case either is making problems.\
+\
+-> The first block of code in just importing the relevant torch related libraries such as torch.nn, torch.nn.functional, etc.\
+\
+->The next block is just manual seeding so that the randomness in the number generation at the background can be fixed hence giving us consistent results.\
+\
+->The next block is for downloading the dataset and applying come transforms to it. The transforms applied are turning the data type to tensors, converting it to grayscale and normalising it for better performance. The lengths for the training and validation sets are defined and the train set is randomly divided into train and validation sets.\
+\
+->The couple of lines of code after that are for loading the data in the program, declaring and using the batch size. Also, the hyper parameters that will be varied are defined with the variations in arrays.\
+\
+->The neural network class itself is defined next. Since we do not know the number of layers before runtime, we create the layers iteratively depending on the argument sent to the class. This is done by using the nn.Sequential function which lets us add modules over each other in order. We define a container \'91total_layers\'92 that holds our layers using the Sequential container. We gave it a name so that the layers can be individually referred to later in the forward function. Next, in the range of the total layers, layers are added to the container iteratively with the output of a layer being half its input. The last layer is a special case as the output is 10 since out dataset is divided into 10 classes/labels. \
+\
+->The forward function of our neural network class takes a batch of data and the activation function we want to use. First it flattens the data using the built in torch.flatten function, then it iteratively applies the selected activation function to all but the last layer. The data tensor is then returned. \
+\
+->The next block is the training function. I wrote it as a function so that I could use it over and over again for different hyper parameter trained models. The function defines the optimiser as Adam, the epochs as 10, the loss function as CrossEntropyLoss function which includes both the loss and the softmax function which is also why we did not apply a softmax function to the last layer in the forward function. Then we iterate through the epochs and the training set, each time sending a batch of pictures to the forward function, then calculating the loss and then performing the back propagation. \
+\
+-> The validation function comes next. Again, I made it into a function so that it could be used over and over again The loss is defined in a similar way. The iteration is done the same way again but this time the accuracy is also calculated by comparing the labels the trained network attaches to the pictures to the actual labels attached to them. The correct guesses it made are then divided by the total guesses to find its accuracy.The accuracy and loss are then returned.\
+\
+-> Next, the testing function is defined, again as a function for multiple uses. It works in pretty much the same way as the validation function but the difference being the test set rather than the validation set. \
+\
+->The sanity check is done next where basically a new neural network object is defined and then tested with the test set. If everything is fine, we should get approximately 10% accuracy since we have 10 classes for the data set. \
+\
+->Last, we start with the grid search by defining multiple loops iterating through the number of layers, activation functions and the learning rates. For each configuration, we define a neural network object, train it, do validation, test it and then print the results. \
+\
+-> This is the end of our program.}
